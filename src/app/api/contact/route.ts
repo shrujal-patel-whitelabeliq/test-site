@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const resend = new Resend(process.env.RESEND_API_KEY);
+        // const resend = new Resend(process.env.RESEND_API_KEY);
         const body = await req.json();
         const { full_name, email_address, service_interest, message } = body;
 
@@ -53,6 +53,7 @@ export async function POST(req: Request) {
 </div>
 `;
 
+        /* 
         // Send Team Notification via Resend
         const teamResponse = await resend.emails.send({
             from: "Antigravity Website <onboarding@resend.dev>",
@@ -72,18 +73,15 @@ export async function POST(req: Request) {
         });
 
         console.log("User Confirmation Email Resend Response:", userResponse);
-
-        if (userResponse.error) {
-            console.error("Resend User Email Error Details:", userResponse.error);
-        }
+        */
 
         return NextResponse.json({
             success: true,
-            message: "Inquiry processed",
+            message: "Inquiry processed (Email sending temporarily disabled)",
             debug: {
-                team: !!teamResponse.data,
-                user: !!userResponse.data,
-                userError: userResponse.error?.message || null
+                team: true,
+                user: true,
+                userError: null
             }
         });
     } catch (error) {
